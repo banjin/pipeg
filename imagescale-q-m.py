@@ -62,7 +62,7 @@ def scale(size, smooth, source, target, concurrency):
     create_processes(size, smooth, jobs, results, concurrency)
     todo = add_jobs(source, target, jobs)
     try:
-        jobs.join()
+        jobs.join()  # 生产者调用此方法进行阻塞，直到队列中所有的项目均被处理，阻塞将持续到队列中的每个项目调用task_done方法为止
     except KeyboardInterrupt: # May not work on Windows
         Qtrac.report("canceling...")
         canceled = True
@@ -94,7 +94,8 @@ def worker(size, smooth, jobs, results):
             except Image.Error as err:
                 Qtrac.report(str(err), True)
         finally:
-            jobs.task_done()
+            jobs.task_done()  # 使用者使用此方法发出信号，表示get的返回项目已经被处理。必须与get方法一一对应，如果调用此方法的次数大于从
+                                # 队列中删除项目的数量，将因为ValueError异常，通知进程是使用共享的信号和条件变量来实现的。
 
 
 def add_jobs(source, target, jobs):

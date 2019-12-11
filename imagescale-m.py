@@ -23,8 +23,8 @@ import Image
 import Qtrac
 
 
-Result = collections.namedtuple("Result", "copied scaled name")
-Summary = collections.namedtuple("Summary", "todo copied scaled canceled")
+Result = collections.namedtuple("Result", "copied scaled name")  # 单个图形的结果
+Summary = collections.namedtuple("Summary", "todo copied scaled canceled")   # 所有图形的结果汇总
 
 
 def main():
@@ -105,6 +105,17 @@ def wait_for(futures):
 
 
 def scale_one(size, smooth, sourceImage, targetImage):
+    """缩小单个图片
+    
+    Arguments:
+        size {[type]} -- [description]
+        smooth {[type]} -- [description]
+        sourceImage {[type]} -- [description]
+        targetImage {[type]} -- [description]
+    
+    Returns:
+        [type] -- [description]
+    """
     oldImage = Image.from_file(sourceImage)
     if oldImage.width <= size and oldImage.height <= size:
         oldImage.save(targetImage)
