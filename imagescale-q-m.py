@@ -19,12 +19,12 @@ import Image
 import Qtrac
 
 
-Result = collections.namedtuple("Result", "copied scaled name")
-Summary = collections.namedtuple("Summary", "todo copied scaled canceled")
+Result = collections.namedtuple("Result", "copied scaled name")  # name 缩小后的名字  单个图片的处理结果
+Summary = collections.namedtuple("Summary", "todo copied scaled canceled")  # 所有图片处理结果的汇总
 
 
 def main():
-    size, smooth, source, target, concurrency = handle_commandline()
+    size, smooth, source, target, concurrency = handle_commandline()  # 读取命令行参数
     Qtrac.report("starting...")
     summary = scale(size, smooth, source, target, concurrency)
     summarize(summary, concurrency)

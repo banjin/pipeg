@@ -41,10 +41,10 @@ def handle_commandline():
             help="specify the concurrency (for debugging and "
                 "timing) [default: %(default)d]")
     parser.add_argument("-s", "--size", default=400, type=int,
-            help="make a scaled image that fits the given dimension "
+            help="缩小后的图像尺寸 "
                 "[default: %(default)d]")
     parser.add_argument("-S", "--smooth", action="store_true",
-            help="use smooth scaling (slow but good for text)")
+            help="是否使用平滑缩放(slow but good for text)")
     parser.add_argument("source",
             help="the directory containing the original .xpm images")
     parser.add_argument("target",

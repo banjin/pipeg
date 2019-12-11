@@ -52,7 +52,7 @@ def create_threads(limit, jobs, results, concurrency):
 
 
 def worker(limit, jobs, results):
-    while True:
+    while True:   # 调用此方法的是守护线程，当主线程结束后自动会退出。
         try:
             feed = jobs.get()
             ok, result = Feed.read(feed, limit)
